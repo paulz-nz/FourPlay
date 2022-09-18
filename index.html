@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Four Play</title>
+
+    <!-- Icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+    <!-- WinJS references -->
+    <!--<link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>-->
+
+    <!-- ConnectFour references -->
+    <link href="css/default.css" rel="stylesheet" />
+    <script src="js/default.js"></script>
+    <script src="js/board-data.js"></script>
+    <script src="js/winning-moves.js"></script>
+</head>
+<body onload="ConnectFour.initialise()">
+    <div id="main">
+        <div id="content">
+            <div class="content">
+                <div class="tables">
+                    <table border="0" cellpadding="0" cellspacing="0" class="header">
+                        <tr>
+                            <td id="A0" class="hover"></td>
+                            <td id="B0" class="hover"></td>
+                            <td id="C0" class="hover"></td>
+                            <td id="D0" class="hover"></td>
+                            <td id="E0" class="hover"></td>
+                            <td id="F0" class="hover"></td>
+                            <td id="G0" class="hover"></td>
+                        </tr>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="board">
+                        <tr>
+                            <td id="A6" class="cells"></td>
+                            <td id="B6" class="cells"></td>
+                            <td id="C6" class="cells"></td>
+                            <td id="D6" class="cells"></td>
+                            <td id="E6" class="cells"></td>
+                            <td id="F6" class="cells"></td>
+                            <td id="G6" class="cells"></td>
+                        </tr>
+                        <tr>
+                            <td id="A5" class="cells"></td>
+                            <td id="B5" class="cells"></td>
+                            <td id="C5" class="cells"></td>
+                            <td id="D5" class="cells"></td>
+                            <td id="E5" class="cells"></td>
+                            <td id="F5" class="cells"></td>
+                            <td id="G5" class="cells"></td>
+                        </tr>
+                        <tr>
+                            <td id="A4" class="cells"></td>
+                            <td id="B4" class="cells"></td>
+                            <td id="C4" class="cells"></td>
+                            <td id="D4" class="cells"></td>
+                            <td id="E4" class="cells"></td>
+                            <td id="F4" class="cells"></td>
+                            <td id="G4" class="cells"></td>
+                        </tr>
+                        <tr>
+                            <td id="A3" class="cells"></td>
+                            <td id="B3" class="cells"></td>
+                            <td id="C3" class="cells"></td>
+                            <td id="D3" class="cells"></td>
+                            <td id="E3" class="cells"></td>
+                            <td id="F3" class="cells"></td>
+                            <td id="G3" class="cells"></td>
+                        </tr>
+                        <tr>
+                            <td id="A2" class="cells"></td>
+                            <td id="B2" class="cells"></td>
+                            <td id="C2" class="cells"></td>
+                            <td id="D2" class="cells"></td>
+                            <td id="E2" class="cells"></td>
+                            <td id="F2" class="cells"></td>
+                            <td id="G2" class="cells"></td>
+                        </tr>
+                        <tr>
+                            <td id="A1" class="cells"></td>
+                            <td id="B1" class="cells"></td>
+                            <td id="C1" class="cells"></td>
+                            <td id="D1" class="cells"></td>
+                            <td id="E1" class="cells"></td>
+                            <td id="F1" class="cells"></td>
+                            <td id="G1" class="cells"></td>
+                        </tr>
+                    </table>
+                    <div class="panel">
+                        <div id="MODEBLOCK">
+                            <p class="panel-heading">Select Opponent:</p>
+                            <div class="start tile" id="HUMAN" onclick="ConnectFour.start(false)">
+                                <img src="images/human.png" class="title-icon" style="vertical-align:middle" />
+                                Human
+                            </div>
+                            <div class="start tile" id="MACHINE" onclick="ConnectFour.start(true)">
+                                <img src="images/machine.png" class="title-icon" style="vertical-align:middle" />
+                                Machine
+                            </div>               
+                        </div>
+                        <div id="GAME" class="hide">
+                            <div id="NEXTBLOCK">
+                                <div>
+                                    <p class="panel-heading">
+                                        Next Turn:                    
+                                    </p>
+                                    <div id="NEXT" class="next"></div>
+                                </div>
+                                <div>
+                                    <div class="restart tile" id="RESTART" onclick="ConnectFour.refresh(true)">
+                                        <img src="images/restart.png" class="title-icon" style="vertical-align:middle" />
+                                        Restart
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="RESULTBLOCK" class="hide">
+                            <p class="panel-heading result">
+                                <span id="RESULT"></span>
+                            </p>
+                            <div class="play-again tile" id="PLAYAGAIN" onclick="ConnectFour.refresh(false)">
+                                <img src="images/restart.png" class="title-icon" style="vertical-align:middle" />
+                                Play Again
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div id="PLAYERS">
+                            <div class="player">
+                                <p><span id="PLAYER1">Player 1</span>:</p>
+                                <div class="next"><span class="count" id="PLAYER1COUNT">0</span></div>
+                            </div>
+                            <div class="player">
+                                <p><span id="PLAYER2">Player 2</span>:</p>
+                                <div class="next" style="background-position: 0 -60px"><span class="count" id="PLAYER2COUNT">0</span></div>
+                            </div>
+                        </div>
+                        <div class="reset tile" id="RESET" onclick="ConnectFour.reset()">
+                            <img src="images/reset.png" class="title-icon" style="vertical-align:middle" />
+                            Reset Wins
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</body>
+</html>
