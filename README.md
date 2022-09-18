@@ -1,1 +1,1 @@
-# Four Play  - [▶ Play](https://paulz-nz.github.io/FourPlay/)
+# Connect Four - [▶ Play](https://paulz-nz.github.io/FourPlay/)
