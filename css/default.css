@@ -56,7 +56,7 @@ table {
 .hover {
     background-position: 7px -120px;
     background-repeat: no-repeat;
-    background-image: url('../Images/next.png');
+    background-image: url('../images/next.png');
     height: 50px;
     width: 75px;
 }
